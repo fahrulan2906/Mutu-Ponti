@@ -83,7 +83,21 @@ export default function UploadView() {
       const analysisPromises = uploadedLevels.map(async (level) => {
         const file = files[level]!;
         const content = await readFileContent(file);
-        const result = await analyzeLevelData(level, content, currentYear);
+        
+        let result = null;
+        let retries = 2; // Total 3 attempts
+        
+        while (retries >= 0 && !result) {
+          try {
+            result = await analyzeLevelData(level, content, currentYear);
+          } catch (e) {
+            console.warn(`Attempt failed for ${level}, retries left: ${retries}`);
+            if (retries === 0) throw e;
+          }
+          retries--;
+          if (!result && retries >= 0) await new Promise(r => setTimeout(r, 2000));
+        }
+        
         return { level, result };
       });
 
@@ -91,11 +105,14 @@ export default function UploadView() {
       
       const newAppData = JSON.parse(JSON.stringify(allData[currentYear] || ZeroData));
       let hasValidResult = false;
+      let lastError = "";
 
       results.forEach(({ level, result }) => {
         if (result && Object.keys(result).length > 1) {
           newAppData[level] = { ...ZeroData[level], ...result };
           hasValidResult = true;
+        } else if (!result) {
+          lastError = `AI gagal memproses data untuk jenjang ${level}.`;
         }
       });
 
@@ -103,7 +120,7 @@ export default function UploadView() {
         setData(currentYear, newAppData);
         setSuccess(true);
       } else {
-        throw new Error("AI gagal memproses data. Pastikan file berisi Rapor Pendidikan yang valid.");
+        throw new Error(lastError || "AI gagal memproses data. Pastikan file berisi Rapor Pendidikan yang valid.");
       }
     } catch (err: any) {
       setError(err.message || "Terjadi kesalahan saat sinkronisasi data.");
