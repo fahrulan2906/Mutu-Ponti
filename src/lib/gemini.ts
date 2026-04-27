@@ -4,13 +4,12 @@ export async function analyzeLevelData(level: 'PAUD' | 'SD' | 'SMP', content: st
   // Get and sanitize API Key
   const apiKey = (process.env.GEMINI_API_KEY || "").trim().replace(/^["']|["']$/g, '');
 
-  if (!apiKey) {
-    throw new Error("API Key Gemini tidak ditemukan. Pastikan sudah diatur di platform.");
+  if (!apiKey || apiKey === "undefined") {
+    throw new Error("API Key Gemini tidak ditemukan. Jika Anda menjalankan ini di Vercel, pastikan GEMINI_API_KEY sudah diatur di Dashboard Vercel > Settings > Environment Variables.");
   }
 
   try {
     const ai = new GoogleGenAI({ apiKey });
-    // Use gemini-3-flash-preview as recommended for text tasks
     
     // Data optimization
     const lines = content.split('\n');
