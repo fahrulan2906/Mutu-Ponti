@@ -8,42 +8,42 @@ import {
 export const Initial2024 = {
   PAUD: {
     dashboard: {
-      dimensions: { output: 0, proses: 68.45, input: 62.12 },
+      dimensions: { output: 0, proses: 64.18, input: 5.68 },
       priorities: [
-        { id: 'D.1', name: 'Perencanaan untuk Proses Pembelajaran yang efektif', value: 65.20 },
-        { id: 'D.2', name: 'Proses belajar yang sesuai bagi anak usia dini', value: 72.15 },
-        { id: 'D.3', name: 'Pembelajaran yang membangun kemampuan fondasi', value: 58.40 },
-        { id: 'E.1', name: 'Indeks ketersediaan Sarana Prasarana Esensial', value: 70.05 },
+        { id: 'D.1', name: 'Perencanaan untuk Proses Pembelajaran yang efektif', value: 51.58 },
+        { id: 'D.2', name: 'Proses belajar yang sesuai bagi anak usia dini', value: 65.54 },
+        { id: 'D.3', name: 'Pembelajaran yang membangun kemampuan fondasi', value: 75.43 },
+        { id: 'E.1', name: 'Indeks ketersediaan Sarana Prasarana Esensial', value: 5.68 },
       ],
-      summary: "Capaian PAUD tahun 2024 menunjukkan fokus pada proses belajar, namun sarana esensial masih memerlukan peningkatan merata."
+      summary: "Capaian PAUD Kota Pontianak 2024 menunjukkan kekuatan pada pembelajaran fondasi, namun sarana prasarana esensial masih sangat rendah."
     },
     analisis: [], akarMasalah: [], rekomendasi: []
   },
   SD: {
     dashboard: {
-      dimensions: { output: 62.45, proses: 71.20, input: 65.80 },
+      dimensions: { output: 66.35, proses: 72.48, input: 70.84 },
       priorities: [
-        { id: 'A.1', name: 'Kemampuan Literasi', value: 64.20 },
-        { id: 'A.2', name: 'Kemampuan Numerasi', value: 52.15 },
-        { id: 'A.3', name: 'Karakter', value: 68.40 },
-        { id: 'D.4', name: 'Iklim Keamanan', value: 85.05 },
-        { id: 'D.8', name: 'Iklim Kebhinekaan', value: 90.12 },
+        { id: 'A.1', name: 'Kemampuan Literasi', value: 78.89 },
+        { id: 'A.2', name: 'Kemampuan Numerasi', value: 62.44 },
+        { id: 'A.3', name: 'Karakter', value: 57.71 },
+        { id: 'D.4', name: 'Iklim Keamanan', value: 72.48 },
+        { id: 'D.8', name: 'Iklim Kebhinekaan', value: 70.84 },
       ],
-      summary: "Tahun 2024, jenjang SD unggul dalam iklim keamanan dan kebinekaan, namun numerasi masih menjadi tantangan utama."
+      summary: "Tahun 2024, jenjang SD Kota Pontianak memiliki literasi yang baik (78.89), namun karakter dan numerasi masih di level sedang."
     },
     analisis: [], akarMasalah: [], rekomendasi: []
   },
   SMP: {
     dashboard: {
-      dimensions: { output: 68.12, proses: 75.40, input: 70.25 },
+      dimensions: { output: 72.91, proses: 70.30, input: 78.04 },
       priorities: [
-        { id: 'A.1', name: 'Kemampuan Literasi', value: 72.45 },
-        { id: 'A.2', name: 'Kemampuan Numerasi', value: 58.12 },
-        { id: 'A.3', name: 'Karakter', value: 71.20 },
-        { id: 'D.4', name: 'Iklim Keamanan', value: 82.35 },
-        { id: 'D.8', name: 'Iklim Kebhinekaan', value: 88.50 },
+        { id: 'A.1', name: 'Kemampuan Literasi', value: 81.76 },
+        { id: 'A.2', name: 'Kemampuan Numerasi', value: 72.20 },
+        { id: 'A.3', name: 'Karakter', value: 64.78 },
+        { id: 'D.4', name: 'Iklim Keamanan', value: 70.30 },
+        { id: 'D.8', name: 'Iklim Kebhinekaan', value: 78.04 },
       ],
-      summary: "Siswa SMP menunjukkan literasi yang cukup baik di 2024, dengan dukungan iklim sekolah yang inklusif."
+      summary: "SMP Kota Pontianak 2024 menunjukkan performa literasi yang kuat (81.76) didukung oleh iklim kebhinekaan yang sangat baik."
     },
     analisis: [], akarMasalah: [], rekomendasi: []
   }
@@ -52,42 +52,42 @@ export const Initial2024 = {
 export const Initial2025 = {
   PAUD: {
     dashboard: {
-      dimensions: { output: 0, proses: 72.12, input: 68.45 },
+      dimensions: { output: 0, proses: 65.74, input: 18.06 },
       priorities: [
-        { id: 'D.1', name: 'Perencanaan untuk Proses Pembelajaran yang efektif', value: 71.45 },
-        { id: 'D.2', name: 'Proses belajar yang sesuai bagi anak usia dini', value: 75.80 },
-        { id: 'D.3', name: 'Pembelajaran yang membangun kemampuan fondasi', value: 64.20 },
-        { id: 'E.1', name: 'Indeks ketersediaan Sarana Prasarana Esensial', value: 74.15 },
+        { id: 'D.1', name: 'Perencanaan untuk Proses Pembelajaran yang efektif', value: 52.43 },
+        { id: 'D.2', name: 'Proses belajar yang sesuai bagi anak usia dini', value: 62.40 },
+        { id: 'D.3', name: 'Pembelajaran yang membangun kemampuan fondasi', value: 82.38 },
+        { id: 'E.1', name: 'Indeks ketersediaan Sarana Prasarana Esensial', value: 18.06 },
       ],
-      summary: "Estimasi 2025 menunjukkan tren positif pada perencanaan pembelajaran seiring dengan pelatihan guru yang masif."
+      summary: "Proyeksi PAUD 2025 menunjukkan peningkatan signifikan pada pembelajaran fondasi dan sarana esensial."
     },
     analisis: [], akarMasalah: [], rekomendasi: []
   },
   SD: {
     dashboard: {
-      dimensions: { output: 67.85, proses: 74.30, input: 69.15 },
+      dimensions: { output: 65.05, proses: 79.10, input: 71.62 },
       priorities: [
-        { id: 'A.1', name: 'Kemampuan Literasi', value: 70.12 },
-        { id: 'A.2', name: 'Kemampuan Numerasi', value: 58.45 },
-        { id: 'A.3', name: 'Karakter', value: 72.10 },
-        { id: 'D.4', name: 'Iklim Keamanan', value: 88.20 },
-        { id: 'D.8', name: 'Iklim Kebhinekaan', value: 92.45 },
+        { id: 'A.1', name: 'Kemampuan Literasi', value: 78.33 },
+        { id: 'A.2', name: 'Kemampuan Numerasi', value: 59.93 },
+        { id: 'A.3', name: 'Karakter', value: 56.90 },
+        { id: 'D.4', name: 'Iklim Keamanan', value: 79.10 },
+        { id: 'D.8', name: 'Iklim Kebhinekaan', value: 71.62 },
       ],
-      summary: "Tahun 2025 diproyeksikan adanya kenaikan pada literasi dan numerasi melalui program penguatan kurikulum merdeka."
+      summary: "Tahun 2025, SD Kota Pontianak diprediksi mengalami peningkatan signifikan pada iklim keamanan sekolah."
     },
     analisis: [], akarMasalah: [], rekomendasi: []
   },
   SMP: {
     dashboard: {
-      dimensions: { output: 71.40, proses: 78.15, input: 73.50 },
+      dimensions: { output: 77.03, proses: 86.06, input: 81.33 },
       priorities: [
-        { id: 'A.1', name: 'Kemampuan Literasi', value: 76.20 },
-        { id: 'A.2', name: 'Kemampuan Numerasi', value: 64.15 },
-        { id: 'A.3', name: 'Karakter', value: 75.80 },
-        { id: 'D.4', name: 'Iklim Keamanan', value: 85.12 },
-        { id: 'D.8', name: 'Iklim Kebhinekaan', value: 90.35 },
+        { id: 'A.1', name: 'Kemampuan Literasi', value: 86.28 },
+        { id: 'A.2', name: 'Kemampuan Numerasi', value: 79.70 },
+        { id: 'A.3', name: 'Karakter', value: 65.11 },
+        { id: 'D.4', name: 'Iklim Keamanan', value: 86.06 },
+        { id: 'D.8', name: 'Iklim Kebhinekaan', value: 81.33 },
       ],
-      summary: "Performa SMP 2025 diperkirakan meningkat, didorong oleh efektivitas komunitas belajar di tingkat kota."
+      summary: "Proforma SMP 2025 diperkirakan meningkat pesat terutama pada kemampuan literasi dan iklim sekolah."
     },
     analisis: [], akarMasalah: [], rekomendasi: []
   }
