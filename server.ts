@@ -2,7 +2,7 @@ import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
 import { fileURLToPath } from "url";
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,15 +18,15 @@ async function startServer() {
     const { level, content, year } = req.body;
     
     // Get and sanitize API Key (Only available on server)
-    const apiKey = (process.env.GEMINI_API_KEY || "").trim().replace(/^["']|["']$/g, '');
+    const apiKey = (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY ||"").trim().replace(/["'']/g, '');
 
     if (!apiKey) {
-      console.error("[AI SERVICE] Missing API Key");
-      return res.status(500).json({ error: "API Key Gemini tidak ditemukan di server. Pastikan sudah diatur di environment variables." });
+      console.error("[AI SERVICE] Missing API Key. Pastikan GEMINI_API_KEY sudah ditambahkan di Vercel Environment Variables.")
+      return res.status(500).json({ error: "API Key Gemini tidak ditemukan di server. Silahkan cek pengaturan di Vercel." });
     }
-
+console.log("[AI SERVICE] Gemini API Key berhasil dimuat (panjang:",api.Key.length, ")");
     try {
-      const ai = new GoogleGenAI({ apiKey });
+      const ai = new GoogleGenerativeAI({ apiKey });
       
       // Data optimization
       const lines = content.split('\n');
