@@ -23,7 +23,7 @@ export default function AnalisisView() {
     { title: 'Kualitas Proses (D)', icon: Settings, prefix: 'D.' },
     { title: 'Kualitas Input (E)', icon: UserCheck, prefix: 'E.' },
     { title: 'Indikator Lainnya', icon: Layers, prefix: 'OTHER' },
-  ];
+  ].filter(group => !(currentLevel === 'PAUD' && group.prefix === 'A.'));
 
   return (
     <div className="space-y-8">

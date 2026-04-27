@@ -26,7 +26,7 @@ export default function DashboardView() {
     { name: 'OUTPUT', value: displayData.dimensions?.output || 0, color: '#0284C7', desc: 'Dimensi A (Hasil)' },
     { name: 'PROSES', value: displayData.dimensions?.proses || 0, color: '#10B981', desc: 'Dimensi D (Proses)' },
     { name: 'INPUT', value: displayData.dimensions?.input || 0, color: '#EA580C', desc: 'Dimensi C & E' },
-  ] : [];
+  ].filter(item => !(currentLevel === 'PAUD' && item.name === 'OUTPUT')) : [];
 
   return (
     <div className="space-y-6">
@@ -45,17 +45,19 @@ export default function DashboardView() {
         <>
           {/* Dimension Cards & Visualization */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className={`lg:col-span-2 grid grid-cols-1 ${currentLevel === 'PAUD' ? 'md:grid-cols-2' : 'md:grid-cols-3'} gap-6`}>
               {/* Output Card */}
-              <div className="bg-gradient-to-br from-[#0284C7] to-[#38BDF8] p-8 rounded-[32px] text-white shadow-xl shadow-blue-500/10 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-8 opacity-20 transform translate-x-4 -translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform">
-                  <BarChart3 size={100} strokeWidth={1} />
+              {currentLevel !== 'PAUD' && (
+                <div className="bg-gradient-to-br from-[#0284C7] to-[#38BDF8] p-8 rounded-[32px] text-white shadow-xl shadow-blue-500/10 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-8 opacity-20 transform translate-x-4 -translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform">
+                    <BarChart3 size={100} strokeWidth={1} />
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4 opacity-80">Output</p>
+                  <h3 className="text-6xl font-black mb-4 tracking-tighter">{(displayData.dimensions?.output || 0).toFixed(2)}</h3>
+                  <p className="text-sm font-bold opacity-90 mb-6">Capaian Siswa</p>
+                  <span className="inline-block bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black leading-none italic">Dimensi A (Hasil)</span>
                 </div>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-4 opacity-80">Output</p>
-                <h3 className="text-6xl font-black mb-4 tracking-tighter">{(displayData.dimensions?.output || 0).toFixed(2)}</h3>
-                <p className="text-sm font-bold opacity-90 mb-6">Capaian Siswa</p>
-                <span className="inline-block bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black leading-none italic">Dimensi A (Hasil)</span>
-              </div>
+              )}
 
               {/* Proses Card */}
               <div className="bg-gradient-to-br from-[#10B981] to-[#6EE7B7] p-8 rounded-[32px] text-white shadow-xl shadow-emerald-500/10 relative overflow-hidden group">

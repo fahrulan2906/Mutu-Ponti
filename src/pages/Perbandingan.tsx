@@ -14,13 +14,15 @@ export default function PerbandinganView() {
   const p2024 = data2024?.priorities || [];
   const p2025 = data2025?.priorities || [];
 
-  const hasData = (data2024?.dimensions?.output || 0) > 0 || (data2025?.dimensions?.output || 0) > 0;
+  const hasData = currentLevel === 'PAUD' 
+    ? (data2024?.dimensions?.proses || 0) > 0 || (data2025?.dimensions?.proses || 0) > 0
+    : (data2024?.dimensions?.output || 0) > 0 || (data2025?.dimensions?.output || 0) > 0;
 
   const dimensionData = [
     { name: 'OUTPUT', '2024': data2024?.dimensions?.output || 0, '2025': data2025?.dimensions?.output || 0 },
     { name: 'PROSES', '2024': data2024?.dimensions?.proses || 0, '2025': data2025?.dimensions?.proses || 0 },
     { name: 'INPUT', '2024': data2024?.dimensions?.input || 0, '2025': data2025?.dimensions?.input || 0 },
-  ];
+  ].filter(item => !(currentLevel === 'PAUD' && item.name === 'OUTPUT'));
 
   // Robustly Merge indicators from both years
   const allIndicatorIds = Array.from(new Set([
