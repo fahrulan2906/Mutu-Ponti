@@ -53,13 +53,29 @@ export default function UploadView() {
           const bstr = event.target?.result;
           const workbook = XLSX.read(bstr, { type: 'binary' });
           let fullText = "";
-          workbook.SheetNames.forEach(sheetName => {
+          
+          // Prioritaskan sheet yang kemungkinan berisi data utama
+          const prioritizedSheets = workbook.SheetNames.filter(name => 
+            name.toLowerCase().includes('laporan') || 
+            name.toLowerCase().includes('rapor') || 
+            name.toLowerCase().includes('indikator') ||
+            name.toLowerCase().includes('data')
+          );
+          
+          const sheetsToUse = prioritizedSheets.length > 0 ? prioritizedSheets : workbook.SheetNames.slice(0, 2);
+          
+          sheetsToUse.forEach(sheetName => {
             const worksheet = workbook.Sheets[sheetName];
             fullText += XLSX.utils.sheet_to_csv(worksheet);
           });
+          
+          if (!fullText.trim()) {
+             throw new Error("File kosong atau tidak dapat terbaca.");
+          }
+          
           resolve(fullText);
-        } catch (e) {
-          reject(new Error(`Gagal membaca file ${file.name}.`));
+        } catch (e: any) {
+          reject(new Error(`Gagal membaca file ${file.name}: ${e.message}`));
         }
       };
       reader.onerror = () => reject(new Error(`Gagal mengunggah ${file.name}.`));
@@ -108,11 +124,11 @@ export default function UploadView() {
       let lastError = "";
 
       results.forEach(({ level, result }) => {
-        if (result && Object.keys(result).length > 1) {
+        if (result && Object.keys(result).length > 2) { // Ensure at least dashboard and something else exists
           newAppData[level] = { ...ZeroData[level], ...result };
           hasValidResult = true;
         } else if (!result) {
-          lastError = `AI gagal memproses data untuk jenjang ${level}.`;
+          lastError = `AI gagal memproses data untuk jenjang ${level}. Sistem akan mencoba lagi atau Anda dapat mengunggah file yang lebih spesifik.`;
         }
       });
 
@@ -120,7 +136,7 @@ export default function UploadView() {
         setData(currentYear, newAppData);
         setSuccess(true);
       } else {
-        throw new Error(lastError || "AI gagal memproses data. Pastikan file berisi Rapor Pendidikan yang valid.");
+        throw new Error(lastError || "AI gagal mengekstrak data yang valid. Pastikan file anda adalah Rapor Pendidikan (XLSX) yang berisi data capaian.");
       }
     } catch (err: any) {
       setError(err.message || "Terjadi kesalahan saat sinkronisasi data.");
@@ -226,20 +242,20 @@ export default function UploadView() {
         >
           {isUploading ? <Loader2 size={24} className="animate-spin" /> : <Sparkles size={24} />}
           <span className="uppercase tracking-widest text-lg">
-            {isUploading ? 'Menganalisis Global...' : 'Mulai Analisis Sistem Terintegrasi'}
+            {isUploading ? 'Menganalisis...' : 'Mulai Analisis AI Pro'}
           </span>
         </button>
 
         {isUploading && (
           <p className="text-[10px] font-black text-brand-primary animate-pulse uppercase tracking-[0.2em]">
-            MUTUPONTI AI sedang mengolah data terfragmentasi menjadi wawasan strategis...
+            MUTUPONTI AI Pro sedang mengekstraksi data. Proses ini memerlukan waktu hingga 60 detik...
           </p>
         )}
 
         {error && (
-          <div className="p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600">
-            <AlertCircle size={18} />
-            <span className="text-xs font-bold">{error}</span>
+          <div className="p-4 bg-red-50 border border-red-100 rounded-xl flex items-center gap-3 text-red-600 max-w-2xl">
+            <AlertCircle size={18} className="shrink-0" />
+            <span className="text-xs font-bold leading-relaxed">{error}</span>
           </div>
         )}
 
