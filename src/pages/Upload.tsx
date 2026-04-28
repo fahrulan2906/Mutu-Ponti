@@ -7,7 +7,7 @@ import { motion } from 'motion/react';
 import * as XLSX from 'xlsx';
 
 export default function UploadView() {
-  const { data: allData, setData, currentYear, setCurrentYear } = useApp();
+  const { data: allData, setData, currentYear, setCurrentYear, customApiKey, setCustomApiKey } = useApp();
   const [isUploading, setIsUploading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -105,7 +105,7 @@ export default function UploadView() {
         
         while (retries >= 0 && !result) {
           try {
-            result = await analyzeLevelData(level, content, currentYear);
+            result = await analyzeLevelData(level, content, currentYear, customApiKey);
           } catch (e) {
             console.warn(`Attempt failed for ${level}, retries left: ${retries}`);
             if (retries === 0) throw e;
@@ -231,6 +231,34 @@ export default function UploadView() {
       </div>
 
       <div className="flex flex-col items-center gap-6 pt-6">
+        {/* API Key Override (For usage outside AI Studio) */}
+        <div className="w-full max-w-md bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-4">
+          <div className="flex items-center gap-2 mb-3">
+            <Sparkles size={16} className="text-brand-primary" />
+            <h4 className="text-[11px] font-black uppercase tracking-widest text-brand-text">Konfigurasi API Gemini</h4>
+          </div>
+          <p className="text-[10px] text-brand-text-muted font-medium mb-4 leading-relaxed">
+            Jika digunakan di luar platform AI Studio (seperti Vercel), Anda dapat memasukkan API Key Gemini Anda di sini untuk mengaktifkan fitur AI.
+          </p>
+          <div className="relative">
+            <input 
+              type="password"
+              value={customApiKey}
+              onChange={(e) => setCustomApiKey(e.target.value)}
+              placeholder="Masukkan API Key Gemini (Opsional)..."
+              className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-xs font-bold focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all placeholder:text-slate-300"
+            />
+            {customApiKey && (
+              <button 
+                onClick={() => setCustomApiKey('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300 hover:text-red-400 transition-colors"
+              >
+                <AlertCircle size={14} />
+              </button>
+            )}
+          </div>
+        </div>
+
         <button
           onClick={startAnalysis}
           disabled={isUploading || Object.values(files).every(f => f === null)}

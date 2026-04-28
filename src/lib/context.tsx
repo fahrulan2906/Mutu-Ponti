@@ -14,6 +14,8 @@ type AppContextType = {
   setCurrentYear: (year: string) => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  customApiKey: string;
+  setCustomApiKey: (key: string) => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -23,6 +25,7 @@ const LEVEL_KEY = 'mutuponti_current_level';
 const YEAR_KEY = 'mutuponti_current_year';
 const TAB_KEY = 'mutuponti_active_tab';
 const USER_KEY = 'mutuponti_user';
+const API_KEY_STORE = 'mutuponti_api_key';
 
 const InitialMultiYearData = {
   "2024": JSON.parse(JSON.stringify(Initial2024)),
@@ -52,6 +55,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   });
   const [activeTab, setActiveTab] = useState(() => {
     return localStorage.getItem(TAB_KEY) || 'dashboard';
+  });
+  const [customApiKey, setCustomApiKey] = useState(() => {
+    return localStorage.getItem(API_KEY_STORE) || '';
   });
 
   const setData = (year: string, newData: any) => {
@@ -89,13 +95,18 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(TAB_KEY, activeTab);
   }, [activeTab]);
 
+  useEffect(() => {
+    localStorage.setItem(API_KEY_STORE, customApiKey);
+  }, [customApiKey]);
+
   return (
     <AppContext.Provider value={{ 
       user, setUser, 
       data, setData, 
       currentLevel, setCurrentLevel,
       currentYear, setCurrentYear,
-      activeTab, setActiveTab 
+      activeTab, setActiveTab,
+      customApiKey, setCustomApiKey
     }}>
       {children}
     </AppContext.Provider>
