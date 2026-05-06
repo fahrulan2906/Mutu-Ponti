@@ -45,6 +45,7 @@ export async function analyzeLevelData(level: 'PAUD' | 'SD' | 'SMP', content: st
       4. DASHBOARD: Hitung rata-rata dimensi (0-100). Jika data 0, rata-rata dimensi tersebut harus 0.
       5. NILAI PRIORITAS: Pastikan 'priorities' di JSON berisi tepat item-item di atas sesuai jenjangnya. Gunakan nama indikator yang persis sama seperti instruksi nomor 3 (misalnya pakai 'Iklim Keamanan' dan 'Iklim Kebhinekaan').
       6. COCOKKAN NAMA: Jika kolom indikator mengandung kata kunci di atas (seperti 'Literasi' saja atau 'Numerasi' saja), anggap itu cocok. JANGAN salah mengambil sub-indikator.
+      7. LITERASI & NUMERASI (A.1 & A.2): Ambil nilai langsung dari baris indikator utama (A.1 dan A.2) yang tercantum di kolom 'Skor' atau 'Nilai Indikator'. JANGAN melakukan perhitungan rata-rata sendiri; ambil nilai eksak yang tertulis di baris tersebut.
       
       WAJIB OUTPUT JSON VALID DENGAN SKEMA:
       {
